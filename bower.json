@@ -1,0 +1,22 @@
+{
+  "name": "gulp-demo",
+  "description": "this is a demo.",
+  "main": "index.js",
+  "authors": [
+    "yate"
+  ],
+  "license": "ISC",
+  "homepage": "index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "underscore": "^1.8.3",
+    "bootstrap": "^3.3.7"
+  }
+}

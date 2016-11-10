@@ -152,7 +152,7 @@ gulp.task('templates', function(){
 });
 
 gulp.task("reload", function () {
-    util.log("content change!");
+    util.log(util.colors.magenta('==>content change'));
     return gulp.src("src/**")
         .pipe(connect.reload());
 });

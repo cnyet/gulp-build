@@ -3,5 +3,6 @@ node_modules/
 src/version/
 bower_components/
 build/
+dist/
 *.log
 *.bin

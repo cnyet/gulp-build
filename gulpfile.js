@@ -21,6 +21,8 @@ var gulp = require("gulp"),                     //基础库
     livereload = require("gulp-livereload"),    //重新加载
     del = require("del"),                       //文件清理
     sync = require("gulp-sync"),                //任务异步处理
+    filter = require("gulp-filter"),                //把stream里的文件根据一定的规则进行筛选过滤
+    print = require("gulp-print"),                  //打印出stream里面的所有文件名
     runSequence = require("run-sequence"),         //串行执行
     template = require("gulp-template"),           //替换变量以及动态html
     util = require("gulp-util"),                    //打印日志
@@ -39,6 +41,21 @@ var cmd = {
         cdn: "http://cdn.code.baidu.com/"
     },
     prefixUrl = "http://mydomain.com/assets";
+
+var pkg = require('./package.json'),
+    cssFilter = filter("**/components.min.css", {restore: true}),
+    lessFilter = filter("**/default.min.css", {restore: true}),
+    vendorFilter = filter("**/vendor.min.js", {restore: true}),
+    defaultFilter = filter("**/common.min.js", {restore: true}),
+    info = ['/**',
+        ' * <%= pkg.name %> - <%= pkg.description %>',
+        ' * @author <%= pkg.author %>',
+        ' * @version v<%= pkg.version %>',
+        ' * @link <%= pkg.homepage %>',
+        ' * @license <%= pkg.license %>',
+        ' */',
+        ''
+    ].join('\n');
 
 /**js文件代码校验, 删除注释, 合并, 压缩, MD5**/
 gulp.task("minijs", function(){
@@ -72,6 +89,15 @@ gulp.task("minicss", function(){
         .pipe(minifycss())
         .pipe(gulp.dest("src/assets/css/min/"))
         .pipe(connect.reload());
+});
+
+//css,js文件代码校验，编译，合并，压缩，MD5，输出
+gulp.task("optimize", function () {
+   gulp.src("src/assets/**")
+       .pipe(print())
+       .pipe(cssFilter)
+       .pipe(minifycss())
+       .pipe(cssFilter.restore)
 });
 
 /**压缩图片**/
@@ -114,7 +140,7 @@ gulp.task("minihtml", function(){
     return gulp.src("src/**/*.html")
         .pipe(usemin())
         .pipe(minifyhtml(options))
-        //.pipe(template({style: "default.min.css", script: "default.min.js"}))
+        //.pipe(template({style: "default.min.css", script: "common.min.js"}))
         //.pipe(revAppend())
         //.pipe(gulp.dest("build/views/"))
         .pipe(connect.reload());

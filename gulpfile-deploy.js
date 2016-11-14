@@ -48,12 +48,11 @@ var pkg = require('./package.json'),
 gulp.task("clean", function () {
     return gulp.src("dist/")
         .pipe(clean({force: true}));
-
 });
 
 gulp.task("useref", function () {
     var f = filter("**/{*.css,*.js}", {restore: true});
-    gulp.src("src/index.html")
+    return gulp.src("src/index.html")
         .pipe(useref())
         .pipe(cssFilter)
         .pipe(minifycss())
@@ -84,12 +83,12 @@ gulp.task("useref", function () {
 });
 
 gulp.task("inject", function () {
-    var source = gulp.src(["src/assets/css/*.css", "src/assets/js/*.js"], {read: false});
-    gulp.src(["src/*.html", "!src/index.html"])
+    var source = gulp.src(["dist/assets/css/*.css", "dist/assets/js/*.js"], {read: false});
+    return gulp.src(["src/*.html", "!src/index.html"])
         .pipe(print())
         .pipe(inject(source))
         .pipe(usemin())
-        .pipe(gulp.dest("dist/"))
+        .pipe(gulp.dest("dist/"));
 });
 
 gulp.task("wiredep", function () {
@@ -106,8 +105,7 @@ gulp.task("wiredep", function () {
 });
 
 gulp.task("default", function(){
-    runSequence("clean", ["inject"]);
-    //gulp.start("minihtml", "minijs", "minicss");
+    runSequence("clean", ["useref"], "inject");
 });
 
 

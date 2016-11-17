@@ -50,6 +50,8 @@ var pkg = require("./package.json"),
         ' * <%= pkg.name %> - <%= pkg.description %>',
         ' * @author <%= pkg.author %>',
         ' * @version v<%= pkg.version %>',
+        ' * @link <%= pkg.homepage %>',
+        ' * @license <%= pkg.license %>',
         ' */',
         ''
     ].join('\n');
@@ -68,34 +70,14 @@ gulp.task("cssmin", function (done) {
         .pipe(lessFilter)
         .pipe(less())
         .pipe(concat("default.min.css"))
-        .pipe(minifycss())
         .pipe(lessFilter.restore)
         .pipe(cssFilter)
+        .pipe(minifycss())
         .pipe(concat("components.min.css"))
-        .pipe(minifycss())
-        .pipe(cssFilter.restore)
-        .pipe(md5(10, 'dist/*.html'))
-        .pipe(gulp.dest("dist/css"))
-        .on("end", done);
-});
-
-gulp.task("dev:css", function (done) {
-    var cssFilter = filter("**/components.css", {restore: true}),
-        lessFilter = filter("**/main.less", {restore: true});
-    gulp.src(["src/css/**"])
-        .pipe(lessFilter)
-        .pipe(less())
-        .pipe(concat("default.min.css"))
-        .pipe(minifycss())
-        .pipe(lessFilter.restore)
-        .pipe(cssFilter)
-        .pipe(concat("components.min.css"))
-        .pipe(minifycss())
         .pipe(cssFilter.restore)
         .pipe(gulp.dest("dist/css"))
         .on("end", done);
 });
-
 //雪碧图操作，先拷贝图片合并压缩css
 gulp.task("sprite", ["copy:images", "cssmin"], function (done) {
     var timestamp = +new Date();
@@ -110,6 +92,7 @@ gulp.task("sprite", ["copy:images", "cssmin"], function (done) {
             }
         }))
         .pipe(base64())
+        .pipe(minifycss())
         .pipe(gulp.dest("dist/css"))
         .on("end", done);
 });
@@ -122,63 +105,44 @@ gulp.task("includefile", function (done) {
         }))
         .pipe(gulp.dest("dist/"))
 });
-//合并压缩js, 加MD5，更改页面引用路径
-gulp.task("jsmin", ["includefile"], function (done) {
+//合并压缩js
+gulp.task("jsmin", function (done) {
     var vendorFilter = filter("**/js/vendor/*.js", {restore: true}),
         defaultFilter = filter("**/js/*.js", {restore: true});
     return gulp.src("src/js/**/*.js")
         .pipe(defaultFilter)
         .pipe(concat("common.min.js"))
-        .pipe(uglify())
         .pipe(header(info, {pkg: pkg}))
         .pipe(defaultFilter.restore)
         .pipe(vendorFilter)
         .pipe(concat("vendor.min.js"))
         .pipe(uglify())
         .pipe(vendorFilter.restore)
+        .pipe(gulp.dest("dist/js"));
+});
+//将js加上10位md5,并修改html中的引用路径，该动作依赖build-js
+gulp.task('md5:js', ['jsmin'], function (done) {
+    var commonFilter = filter("**/common.min.js", {restore: true}),
+        vendorFilter = filter("**/vendor.min.js", {restore: true});
+    return gulp.src('dist/js/*.js')
         .pipe(md5(10, 'dist/*.html'))
-        .pipe(gulp.dest("dist/js"));
+        .pipe(gulp.dest('dist/js'))
+        .pipe(print())
 });
-gulp.task("jsmin", ["includefile"], function (done) {
-    var vendorFilter = filter("**/js/vendor/*.js", {restore: true}),
-        defaultFilter = filter("**/js/*.js", {restore: true});
-    return gulp.src("src/js/**/*.js")
-        .pipe(defaultFilter)
-        .pipe(concat("common.min.js"))
-        .pipe(uglify())
-        .pipe(header(info, {pkg: pkg}))
-        .pipe(defaultFilter.restore)
-        .pipe(vendorFilter)
-        .pipe(concat("vendor.min.js"))
-        .pipe(uglify())
-        .pipe(vendorFilter.restore)
-        .pipe(gulp.dest("dist/js"));
+//将css加上10位md5，并修改html中的引用路径，该动作依赖sprite
+gulp.task('md5:css', ['cssmin'], function (done) {
+    gulp.src('dist/css/*.css')
+        .pipe(md5(10, 'dist/*.html'))
+        .pipe(gulp.dest('dist/css'))
+        .on('end', done);
 });
-/*//将js加上10位md5,并修改html中的引用路径，该动作依赖build-js
- gulp.task('md5:js', ['jsmin'], function (done) {
- var commonFilter = filter("**!/common.min.js", {restore: true}),
- vendorFilter = filter("**!/vendor.min.js", {restore: true});
- return gulp.src('dist/js/!*.js')
- .pipe(md5(10, 'dist/!*.html'))
- .pipe(gulp.dest('dist/js'))
- .pipe(print())
- });
- //将css加上10位md5，并修改html中的引用路径，该动作依赖sprite
- gulp.task('md5:css', ['cssmin'], function (done) {
- gulp.src('dist/css/!*.css')
- .pipe(md5(10, 'dist/!*.html'))
- .pipe(gulp.dest('dist/css'))
- .on('end', done);
- });*/
-
-//清除文件
 gulp.task('clean', function (done) {
     return gulp.src(['dist'])
         .pipe(clean())
 });
-//监听文件变化
+
 gulp.task('watch', function (done) {
-    gulp.watch('src/**/*', ['includefile', 'dev:css', 'dev:js'])
+    gulp.watch('src/**/*', ['cssmin', 'jsmin', 'includefile'])
         .on('end', done);
 });
 
@@ -204,9 +168,9 @@ gulp.task('open', function (done) {
 gulp.task('default', ['connect', 'includefile', 'md5:css', 'md5:js', 'open']);
 
 //开发
-gulp.task('dev', ['connect', 'copy:images', 'includefile', 'dev:css', 'dev:js', 'watch', 'open']);
+gulp.task('dev', ['connect', 'copy:images', 'includefile', 'cssmin', 'jsmin', 'watch', 'open']);
 
 //测试
 gulp.task("test", function(){
-    runSequence("clean", "includefile", ["jsmin"]);
+    runSequence("clean", "includefile", ["jsmin", "md5:js"]);
 });

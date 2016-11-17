@@ -11,6 +11,8 @@
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^5.0.0",
+    "gulp-css-base64": "^1.3.4",
+    "gulp-css-spriter": "^0.3.3",
     "gulp-csslint": "^1.0.0",
     "gulp-file-include": "^1.0.0",
     "gulp-filter": "^4.0.0",
@@ -24,8 +26,10 @@
     "gulp-jshint": "^2.0.2",
     "gulp-less": "^3.1.0",
     "gulp-livereload": "^3.8.1",
+    "gulp-md5-plus": "^0.2.5",
     "gulp-minify-css": "^1.2.4",
     "gulp-minify-html": "^1.0.6",
+    "gulp-open": "^2.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-prefix": "0.0.15",
     "gulp-print": "^2.0.1",
@@ -54,7 +58,7 @@
   },
   "scripts": {
     "gulp": "gulp gulpfile.js",
-    "gulp-dev": "gulp gulpfile.js",
+    "gulp-test": "gulp gulpfile-test.js",
     "gulp-deploy": "gulp --gulpfile 'gulpfile-deploy.js'"
   },
   "author": "yate",

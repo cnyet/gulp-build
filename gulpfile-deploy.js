@@ -31,25 +31,27 @@ var gulp = require("gulp"),                         //gulp基础库
     connect = require("gulp-connect");              //web服务器
 
 var pkg = require('./package.json'),
-    cssFilter = filter("**/components.min.css", {restore: true}),
+    //过滤文件
+    cssFilter = filter("**/components.css", {restore: true}),
     lessFilter = filter("**/default.min.css", {restore: true}),
     vendorFilter = filter("**/vendor.min.js", {restore: true}),
     defaultFilter = filter("**/common.min.js", {restore: true}),
+    //添加注释信息到自己编辑的文件头部
     info = ['/**',
-    ' * <%= pkg.name %> - <%= pkg.description %>',
-    ' * @author <%= pkg.author %>',
-    ' * @version v<%= pkg.version %>',
-    ' * @link <%= pkg.homepage %>',
-    ' * @license <%= pkg.license %>',
-    ' */',
-    ''
-].join('\n');
-
+            ' * <%= pkg.name %> - <%= pkg.description %>',
+            ' * @author <%= pkg.author %>',
+            ' * @version v<%= pkg.version %>',
+            ' */',
+            ''
+        ].join('\n');
+//强制清除文件夹
 gulp.task("clean", function () {
     return gulp.src("dist/")
         .pipe(clean({force: true}));
 });
-
+/**文件引用路径的替换思路：将首页的引用文件单独进行合并后，再编译，压缩，添加自定义注释信息，加MD5，生成版本对照map文件，最后输出到制定目录。
+ * 对于其他html引用路径，将首页合并后生成的css,js文件插入页面，并删除多余的引用文件
+ */
 gulp.task("useref", function () {
     var f = filter("**/{*.css,*.js}", {restore: true});
     return gulp.src("src/index.html")
@@ -68,7 +70,7 @@ gulp.task("useref", function () {
         .pipe(uglify())
         .pipe(header(info, {pkg: pkg}))
         .pipe(defaultFilter.restore)
-        /*.pipe(gulpif("**!/components.min.css", minifycss()))
+        /*.pipe(gulpif("**!/components.css", minifycss()))
         .pipe(gulpif("**!/default.min.css",  less(), minifycss()))
         .pipe(gulpif("**!/common.min.js", uglify(), header(info, { pkg : pkg })))
         .pipe(gulpif("**!/vendor.min.js", uglify()))*/
@@ -81,9 +83,9 @@ gulp.task("useref", function () {
         .pipe(rev.manifest())
         .pipe(gulp.dest('src/revision/'));
 });
-
+//将css,js插入到除首页以外的其他页面
 gulp.task("inject", function () {
-    var source = gulp.src(["dist/assets/css/*.css", "dist/assets/js/*.js"], {read: false});
+    var source = gulp.src(["dist/css/*.css", "dist/js/*.js"], {read: false});
     return gulp.src(["src/*.html", "!src/index.html"])
         .pipe(print())
         .pipe(inject(source))
@@ -91,9 +93,9 @@ gulp.task("inject", function () {
         .pipe(gulp.dest("dist/"));
 });
 
-gulp.task("wiredep", function () {
-    var sources = gulp.src(["./src/assets/css/*.css", "./src/assets/js/*.js"], {read: false});
-    return gulp.src("src/*.html")
+/*gulp.task("wiredep", function () {
+    var sources = gulp.src(["./src/assets/css/!*.css", "./src/assets/js/!*.js"], {read: false});
+    return gulp.src("src/!*.html")
         .pipe(wiredep({
             //directory: "bower_components",
             //bowerJson: require('bower.json'),
@@ -102,7 +104,7 @@ gulp.task("wiredep", function () {
         }))
         //.pipe(inject(sources))
         .pipe(gulp.dest("dist/"));
-});
+});*/
 
 gulp.task("default", function(){
     runSequence("clean", ["useref"], "inject");

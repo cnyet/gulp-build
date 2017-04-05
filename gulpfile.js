@@ -21,6 +21,7 @@ var gulp = require("gulp"),                                 //gulp基础库
     md5 = require('gulp-md5-plus'),                         //给页面引用的js,css,图片引用路径加MD5
     revReplace = require("gulp-rev-replace"),               //重写加了MD5的文件名
     clean = require("gulp-clean"),                          //清除文件
+    gif = require("gulp-if"),                               //判断条件
     del = require("del"),                                   //文件清理
     revCollector = require("gulp-rev-collector"),           //根据map文件替换页面引用文件
     gutil = require("gulp-util"),                            //提供很多常用函数
@@ -64,7 +65,8 @@ var pkg = require("./package.json"),
 gulp.task("copy:files", function () {
     //拷贝字体文件
     gulp.src(filePath.sourcePath.fonts)
-        .pipe(gulp.dest(filePath.sourcePath.fonts));
+        .pipe(gulp.dest(filePath.targetPath.fonts));
+
     //拷贝图片
     gulp.src(filePath.sourcePath.images)
         .pipe(imagemin({
@@ -133,7 +135,7 @@ gulp.task("build:js", function () {
 });
 
 //雪碧图操作，先拷贝图片合并压缩css
-gulp.task("sprite", ["copy:images", "build:css"], function (done) {
+gulp.task("sprite", ["copy:files", "build:css"], function (done) {
     var timestamp = +new Date();
     return gulp.src("dist/css/default.min.css")
         .pipe(spriter({
@@ -151,10 +153,29 @@ gulp.task("sprite", ["copy:images", "build:css"], function (done) {
 
 gulp.task('watch', function () {
     //监听css文件
-    gulp.watch(filePath.sourcePath.css, ["build:css"]);
+    gulp.watch(filePath.sourcePath.css, function (event) {
+        var cssFilter = filter("src/css/**/*.css", {restore: true});
+        var paths = watchPath(event, 'src/', 'dist/');
+        if(event.type == "deleted"){
+            return gulp.src(paths.distPath)
+                .pipe(clean());
+        }else {
+            return gulp.src([filePath.sourcePath.css, "!src/css/**/less", "!src/css/**/less/*"], {base: "src/css/"})
+                .pipe(plumber())
+                .pipe(cssFilter)
+                .pipe(less())
+                .pipe(autoprefixer({
+                    browsers: 'last 2 versions'
+                }))
+                .pipe(cssFilter.restore)
+                .pipe(plumber.stop())
+                .pipe(gulp.dest(filePath.targetPath.css))
+                .pipe(connect.reload());
+        }
+    });
     //监听html文件
     gulp.watch(filePath.sourcePath.html, function (event) {
-        var paths = watchPath(event, 'src/', 'dist/')
+        var paths = watchPath(event, 'src/', 'dist/');
         var options = {
             removeComments: true,                   //清除html注释
             collapseBooleanAttributes: true,        //省略布尔属性值
@@ -166,12 +187,18 @@ gulp.task('watch', function () {
             minifyJS: true,                         //压缩页面js
             minifyCSS: true                         //压缩页面css
         };
-        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath)
-        gutil.log('Dist ' + paths.distPath)
-        gulp.src(paths.srcPath)
-            .pipe(htmlmin(options))
-            .pipe(gulp.dest(paths.distDir))
-            .pipe(connect.reload());
+        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
+        gutil.log('Dist ' + paths.distPath);
+
+        if(event.type == "deleted"){
+            return gulp.src(paths.distPath)
+                .pipe(clean());
+        }else {
+            return gulp.src(paths.srcPath)
+                .pipe(htmlmin(options))
+                .pipe(gulp.dest(paths.distDir))
+                .pipe(connect.reload());
+        }
     });
     //监听js文件
     gulp.watch(filePath.sourcePath.js, function (event) {
@@ -187,17 +214,15 @@ gulp.task('watch', function () {
          */
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
         gutil.log('Dist ' + paths.distPath);
-
-        gulp.src(paths.srcPath)
-            .pipe(gulp.dest(paths.distDir))
-            .pipe(connect.reload());
+        if(event.type == "deleted"){
+            return gulp.src(paths.distPath)
+                .pipe(clean());
+        }else {
+            return gulp.src(paths.srcPath)
+                .pipe(gulp.dest(paths.distDir))
+                .pipe(connect.reload());
+        }
     })
-});
-
-//清除文件
-gulp.task('clean', function (done) {
-    return gulp.src(['dist'])
-        .pipe(clean())
 });
 
 gulp.task('connect', function () {
@@ -218,12 +243,16 @@ gulp.task('open', function (done) {
         }));
 });
 
-//发布
-gulp.task('default', ['clean', 'useref']);
+//清除文件
+gulp.task('clean', function () {
+    return gulp.src(['dist'])
+        .pipe(clean())
+});
+
+//删除文件
+gulp.task('default', ['clean']);
 
 //开发
-// gulp.task('dev', ["clean", 'connect', 'copy:files', 'build:css', 'build:js', 'build:html', 'watch', 'open']);
-
 gulp.task("dev", function(){
-    runSequence("clean", "copy:files", 'build:html', ['build:css', 'build:js', "watch", 'connect'], 'open');
+    runSequence("copy:files", 'build:html', ['build:css', 'build:js', "watch", 'connect'], 'open');
 });

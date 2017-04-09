@@ -152,6 +152,19 @@ gulp.task("sprite", ["copy:files", "build:css"], function (done) {
 });
 
 gulp.task('watch', function () {
+    //监听图片文件
+    gulp.watch(filePath.sourcePath.images, function (event) {
+        var paths = watchPath(event, 'src/', 'dist/');
+        gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
+        gutil.log('Dist ' + paths.distPath);
+
+        gulp.src(paths.srcPath)
+            .pipe(imagemin({
+                progressive: true,
+                use: [pngquant()]
+            }))
+            .pipe(gulp.dest(paths.distDir));
+    });
     //监听css文件
     gulp.watch(filePath.sourcePath.css, function (event) {
         var cssFilter = filter("src/css/**/*.css", {restore: true});

@@ -38,9 +38,11 @@ gulp.task("build:css", function () {
     var cssFilter = plugins.filter(["src/css/**/*.css", "!src/css/components/**"], {restore: true}),
         compFilter = plugins.filter("src/css/components/**/*.{css,less}", {restore: true}),
         cssOptions = {
-            keepSpecialComments: 0              //删除所有注释
-        };
-    return gulp.src(filePath.sourcePath.css)
+            compatibility: 'ie7',//保留ie7及以下兼容写法 类型：String 默认：''or'*' [启用兼容模式； 'ie7'：IE7兼容模式，'ie8'：IE8兼容模式，'*'：IE9+兼容模式]
+            keepSpecialComments: '*' //保留所有特殊前缀 当你用autoprefixer生成的浏览器前缀，如果不加这个参数，有可能将会删除你的部分前缀
+        },
+        timestamp = +new Date();
+    return gulp.src(filePath.sourceCss)
         .pipe(plugins.plumber())
         .pipe(cssFilter)
         .pipe(plugins.less())
@@ -48,31 +50,6 @@ gulp.task("build:css", function () {
             browsers: 'last 2 versions'
         }))
         .pipe(plugins.concat("style.min.css"))
-        .pipe(plugins.cleanCss(cssOptions))
-        .pipe(plugins.header(info, {
-            pkg: pkg
-        }))
-        .pipe(cssFilter.restore)
-        .pipe(compFilter)
-        .pipe(plugins.less())
-        .pipe(plugins.concat("common.min.css"))
-        .pipe(plugins.cleanCss(cssOptions))
-        .pipe(compFilter.restore)
-        .pipe(plugins.plumber.stop())
-        .pipe(plugins.rev())
-        .pipe(plugins.print())
-        .pipe(gulp.dest(filePath.targetPath.css))
-        .pipe(plugins.rev.manifest({
-            base: 'src/revision',
-            merge: true // merge with the existing manifest (if one exists)
-        }));
-});
-
-
-//雪碧图操作，先拷贝图片合并压缩css
-gulp.task("sprite", function (done) {
-    var timestamp = +new Date();
-    return gulp.src("dist/css/*.css")
         .pipe(plugins.cssSpriter({
             //生成sprite的位置
             spriteSheet: "dist/images/spritesheet" + timestamp + ".png",
@@ -83,7 +60,18 @@ gulp.task("sprite", function (done) {
             }
         }))
         .pipe(plugins.cssBase64())
-        .pipe(gulp.dest("dist/css"));
+        .pipe(plugins.cleanCss(cssOptions))
+        .pipe(cssFilter.restore)
+        .pipe(compFilter)
+        .pipe(plugins.concat("common.min.css"))
+        .pipe(plugins.cleanCss(cssOptions))
+        .pipe(compFilter.restore)
+        .pipe(plugins.plumber.stop())
+        .pipe(plugins.rev())
+        .pipe(plugins.print())
+        .pipe(gulp.dest(filePath.targetPath.css))
+        .pipe(plugins.rev.manifest())
+        .pipe(gulp.dest('src/revision/css'));
 });
 
 //压缩合并js
@@ -91,8 +79,7 @@ gulp.task("build:js", function () {
     var jsFilter = plugins.filter(["src/js/**/*.js", "!src/js/vendors/*"], {restore: true}),
         vendorFilter = plugins.filter(["src/js/vendors/**/*.js"], {restore: true});
 
-    return gulp.src(filePath.sourcePath.js)
-        .pipe(plugins.print())
+    return gulp.src(filePath.sourceJs)
         .pipe(plugins.plumber())
         .pipe(jsFilter)
         .pipe(plugins.concat("custom.min.js"))
@@ -109,10 +96,8 @@ gulp.task("build:js", function () {
         .pipe(plugins.rev())
         .pipe(plugins.print())
         .pipe(gulp.dest(filePath.targetPath.js))
-        .pipe(plugins.rev.manifest({
-            base: 'src/revision',
-            merge: true // merge with the existing manifest (if one exists)
-        }));
+        .pipe(plugins.rev.manifest())
+        .pipe(gulp.dest('src/revision/js'));
 });
 
 gulp.task("build:html", function () {
@@ -143,5 +128,9 @@ gulp.task('clean', function () {
 
 //发布
 gulp.task("default", function(){
-    runSequence("clean", "copy:files", 'build:css', 'sprite', 'build:js', 'build:html');
+    runSequence("clean", "copy:files", 'build:css', 'build:js', 'build:html');
+});
+
+gulp.task("test", function(){
+    runSequence("clean", 'build:css');
 });

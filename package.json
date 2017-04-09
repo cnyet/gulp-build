@@ -57,7 +57,7 @@
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
     "map-stream": "0.0.7",
-    "merge-stream": "^1.0.0",
+    "merge-stream": "^1.0.1",
     "run-sequence": "^1.2.2",
     "through2": "^2.0.1",
     "wiredep": "^4.0.0"

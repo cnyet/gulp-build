@@ -7,6 +7,8 @@ var filePath = {
         source: 'source',
         develop: 'develop',
         production: 'production',
+        sourceCss: "src/css/**/*.css",
+        sourceJs: "src/js/**/*.js",
         sourcePath: {
             css: 'src/css/**',
             js: 'src/js/**',

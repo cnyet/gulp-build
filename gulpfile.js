@@ -134,23 +134,6 @@ gulp.task("build:js", function () {
         .pipe(connect.reload());
 });
 
-//雪碧图操作，先拷贝图片合并压缩css
-gulp.task("sprite", ["copy:files", "build:css"], function (done) {
-    var timestamp = +new Date();
-    return gulp.src("dist/css/default.min.css")
-        .pipe(spriter({
-            //生成sprite的位置
-            spriteSheet: "dist/images/spritesheet" + timestamp + ".png",
-            //修改样式文件引用图片地址路径
-            pathToSpriteSheetFromCSS: "../images/spritesheet" +timestamp + ".png",
-            spritesmithOptions: {
-                padding: 10
-            }
-        }))
-        .pipe(base64())
-        .pipe(gulp.dest("dist/css"));
-});
-
 gulp.task('watch', function () {
     //监听图片文件
     gulp.watch(filePath.sourcePath.images, function (event) {

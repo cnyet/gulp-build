@@ -123,7 +123,6 @@ gulp.task("build:js", function () {
             }
         });
     return gulp.src(filePath.sourcePath.js, {base: "src/js/"})
-        .pipe(print())
         .pipe(plumber())
         .pipe(jsFilter)
         /*.pipe(jshint())

@@ -68,7 +68,6 @@ gulp.task("build:css", function () {
         .pipe(compFilter.restore)
         .pipe(plugins.plumber.stop())
         .pipe(plugins.rev())
-        .pipe(plugins.print())
         .pipe(gulp.dest(filePath.targetPath.css))
         .pipe(plugins.rev.manifest())
         .pipe(gulp.dest('src/revision/css'));
@@ -94,7 +93,6 @@ gulp.task("build:js", function () {
         .pipe(vendorFilter.restore)
         .pipe(plugins.plumber.stop())
         .pipe(plugins.rev())
-        .pipe(plugins.print())
         .pipe(gulp.dest(filePath.targetPath.js))
         .pipe(plugins.rev.manifest())
         .pipe(gulp.dest('src/revision/js'));
@@ -129,8 +127,4 @@ gulp.task('clean', function () {
 //发布
 gulp.task("default", function(){
     runSequence("clean", "copy:files", 'build:css', 'build:js', 'build:html');
-});
-
-gulp.task("test", function(){
-    runSequence("clean", 'build:css');
 });

@@ -1,9 +1,8 @@
 # local-gulp
 有三个分支：master, gulp-static, gulp-dynamic
-master分支下是空的，
-gulp-static分支是纯静态文件的构建配置，
-gulp-dynamic分支是带有后台服务的项目构建配置。
-
+<p>master分支下是空的，</p>
+<p>gulp-static分支是纯静态文件的构建配置，</p>
+<p>gulp-dynamic分支是带有后台服务的项目构建配置。</p>
 
 
 ###目录结构

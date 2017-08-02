@@ -1,3 +1,6 @@
+/*
+* gulp开发版本配置
+*/
 var gulp = require("gulp"),                                 //gulp基础库
     os = require('os'),                                     //获取操作系统对象
     jshint = require("gulp-jshint"),                        //审查js代码
@@ -8,7 +11,7 @@ var gulp = require("gulp"),                                 //gulp基础库
     cleanCss = require("gulp-clean-css"),
     less = require("gulp-less"),                            //将less编译成css
     minifycss = require("gulp-minify-css"),                 //压缩css文件
-    htmlmin = require("gulp-htmlmin"),               //压缩html文件
+    htmlmin = require("gulp-htmlmin"),                      //压缩html文件
     imagemin = require("gulp-imagemin"),                    //压缩图片
     pngquant = require('imagemin-pngquant'),                //png图片压缩插件
     header = require("gulp-header"),                        //用来在压缩后的JS、CSS文件中添加头部注释
@@ -33,7 +36,7 @@ var gulp = require("gulp"),                                 //gulp基础库
     filter = require("gulp-filter"),                        //把stream里的文件根据一定的规则进行筛选过滤
     gulpOpen = require('gulp-open'),                        //自动在浏览器打开页面
     print = require("gulp-print"),                          //打印出stream里面的所有文件名
-    watchPath = require('gulp-watch-path'),
+    watchPath = require('gulp-watch-path'),                 //监听变化文件的路径信息
     plumber = require("gulp-plumber"),                      //一旦pipe中的某一steam报错了，保证下面的steam还继续执行
     inject = require("gulp-inject"),                        //指定需要插入html引用文件的列表
     connect = require("gulp-connect");                      //web服务器

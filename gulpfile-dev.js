@@ -1,3 +1,7 @@
+/**
+ * gulp开发版本配置
+ * gulp --gulpfile ./gulpfile-dev.js [default|deploy]
+ */
 var gulp = require("gulp"),                                 //gulp基础库
     os = require('os'),                                     //获取操作系统对象
     jshint = require("gulp-jshint"),                        //审查js代码

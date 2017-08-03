@@ -1,3 +1,7 @@
+/**
+ * gulp发布版本配置
+ * gulp --gulpfile ./gulpfile-deploy.js [default|deploy]
+ */
 var gulp = require("gulp"),                         //gulp基础库
     jshint = require("gulp-jshint"),                //审查javascript
     uglify = require("gulp-uglify"),                //压缩js文件

@@ -1,3 +1,7 @@
+/**
+ * gulp测试版本配置
+ * gulp --gulpfile ./gulpfile-test.js [default|deploy]
+ */
 var gulp = require("gulp"),                     //基础库
     through = require('through2'),              //转化成流文件
     gulpif = require("gulp-if"),                //添加执行任务的条件

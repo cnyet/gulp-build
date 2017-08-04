@@ -1,6 +1,6 @@
 /**
  * gulp发布版本配置
- * gulp --gulpfile ./gulpfile-deploy.js [default|deploy]
+ * gulp --gulpfile ./deploy.js [default|deploy]
  */
 var gulp = require("gulp"),                                 //gulp基础库
     plugins = require('gulp-load-plugins')(),               //自动require你在package.json中声明的依赖
@@ -112,8 +112,8 @@ gulp.task("build:html", function () {
     };
     return gulp.src(filePath.sourcePath.html)
         .pipe(plugins.useref())
-        .pipe(plugins.inject(gulp.src('./dist/css/*.css', {read: false}), {starttag: '<!-- inject:head:{{ext}} -->'}))
-        .pipe(plugins.inject(gulp.src('./dist/js/*.js', {read: false}), {starttag: '<!-- inject:body:{{ext}} -->'}))
+        .pipe(plugins.inject(gulp.src('./dist/css/*.css', {read: false}), {ignorePath:"dist", addRootSlash: false, addPrefix: "..", starttag: '<!-- inject:head:{{ext}} -->'}))
+        .pipe(plugins.inject(gulp.src('./dist/js/*.js', {read: false}), {ignorePath:"dist", addRootSlash: false, addPrefix: "..", starttag: '<!-- inject:body:{{ext}} -->'}))
         .pipe(plugins.htmlmin(options))
         .pipe(gulp.dest(filePath.targetPath.html));
 });

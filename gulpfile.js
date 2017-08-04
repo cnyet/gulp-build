@@ -1,5 +1,6 @@
 /*
 * gulp开发版本配置
+* 编译完成后会在本地启动一个服务，能实时浏览页面
 */
 var gulp = require("gulp"),                                 //gulp基础库
     os = require('os'),                                     //获取操作系统对象

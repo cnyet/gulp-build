@@ -1,13 +1,13 @@
 # local-gulp
-有三个分支：master, gulp-static, gulp-dynamic
-<p>master分支下是空的，</p>
-<p>gulp-static分支是纯静态文件的构建配置，</p>
-<p>gulp-dynamic分支是带有后台服务的项目构建配置。</p>
+### 有三个分支：master, gulp-static, gulp-dynamic
+- master分支下是空的，
+- gulp-static分支是纯静态文件的构建配置，
+- gulp-dynamic分支是带有后台服务的项目构建配置。
 
 
-###目录结构
-<pre>
-
+***
+### 目录结构
+```
 .
 ├── config                  //配置文件目录
 ├── src                     //源文件目录
@@ -26,4 +26,4 @@
 ├── LICENSE.json            //license
 └── package.json            //项目依赖关系说明    
 
-</pre>
+```

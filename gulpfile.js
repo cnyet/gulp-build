@@ -365,7 +365,7 @@ gulp.task('connect', function () {
     var host = {
         path: "dist",
         port: 8082,
-        index: "views/index.html"
+        index: "index.html"
     };
     console.log('connect------------');
     connect.server({
@@ -395,7 +395,7 @@ gulp.task('default', ['clean']);
 
 //开发
 gulp.task("dev", function(){
-    runSequence("clean", "copy:files", 'dev:html', ['dev:css', "dev:js", "watch", 'connect'], 'open');
+    runSequence("clean", "copy:files", 'dev:html', ['dev:css', "dev:js", "watch"], 'connect', 'open');
 });
 
 //发布

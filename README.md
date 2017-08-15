@@ -9,15 +9,11 @@
 ### 目录结构
 ```
 .
-├── config                  //配置文件目录
+├── bower_components        //bower组件库文件目录
+├── dist                    //编译后的文件目录
 ├── src                     //源文件目录
-│     ├── assets            //静态资源目录    
-│     │     ├── css         //样式文件
-│     │     ├── images      //图片
-│     │     └── js          //js文件
-│     ├── include           //公共部分模板文件
-│     ├── mock              //mock测试数据
-│     └── index.html        //首页       
+├── node_modules            //node模块目录
+├── vendors                 //第三方插件和组件文件目录
 ├── README.md               //说明文件
 ├── .gitignore              //git提交忽略文件集合
 ├── .bowerrc                //bower配置文件

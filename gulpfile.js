@@ -40,6 +40,7 @@ var gulp = require("gulp"),                                 //gulp基础库
     plumber = require("gulp-plumber"),                      //一旦pipe中的某一steam报错了，保证下面的steam还继续执行
     inject = require("gulp-inject"),                        //指定需要插入html引用文件的列表
     connect = require("gulp-connect"),                      //web服务器
+    notify = require("gulp-notify"),                        //打印用户错误信息
     httpProxy = require('http-proxy-middleware');           //gulp-connect服务代理
 
 //文件路径配置

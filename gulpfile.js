@@ -244,7 +244,7 @@ gulp.task('watch', function () {
     gulp.watch(filePath.sourcePath.images, function (event) {
         var paths = watchPath(event, 'src/', 'dist/');
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
-        gutil.log('Dist ' + paths.distPath);
+        gutil.log(gutil.colors.blue("build")+ " " + paths.distPath);
 
         if(event.type == "deleted"){
             return gulp.src(paths.distPath)
@@ -265,7 +265,7 @@ gulp.task('watch', function () {
         var paths = watchPath(event, 'src/', 'dist/'),
             cssFilter = filter(["src/css/**/*.{css,less}", "!src/css/components.css"], {restore: true});
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
-        gutil.log('Dist ' + paths.distPath);
+        gutil.log(gutil.colors.blue("build")+ " " + paths.distPath);
         if(event.type == "deleted"){
             return gulp.src(paths.distPath)
                 .pipe(clean());
@@ -293,7 +293,7 @@ gulp.task('watch', function () {
     gulp.watch(["src/views/**/*.html", "src/index.html"], function (event) {
         var paths = watchPath(event, 'src/', 'dist/');
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
-        gutil.log('Dist ' + paths.distPath);
+        gutil.log(gutil.colors.blue("build")+ " " + paths.distPath);
 
         if(event.type == "deleted"){
             return gulp.src(paths.distPath)
@@ -320,7 +320,7 @@ gulp.task('watch', function () {
          distFilename: 'log.js' }
          */
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
-        gutil.log('Dist ' + paths.distPath);
+        gutil.log(gutil.colors.blue("build")+ " " + paths.distPath);
         if(event.type == "deleted"){
             return gulp.src(paths.distPath)
                 .pipe(clean());

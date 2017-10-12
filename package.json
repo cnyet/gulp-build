@@ -29,6 +29,7 @@
     "gulp-md5-plus": "^0.2.5",
     "gulp-minify-css": "^1.2.4",
     "gulp-minify-html": "^1.0.6",
+    "gulp-notify": "^3.0.0",
     "gulp-open": "^2.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-prefix": "0.0.15",
@@ -58,9 +59,7 @@
     "wiredep": "^4.0.0"
   },
   "scripts": {
-    "gulp": "gulp gulpfile.js",
-    "gulp-test": "gulp gulpfile-test.js",
-    "gulp-deploy": "gulp --gulpfile 'gulpfile-deploy.js'"
+    "gulp": "gulp gulpfile.js"
   },
   "author": "yate",
   "license": "ISC",

@@ -39,7 +39,8 @@ var gulp = require("gulp"),                                 //gulp基础库
     watchPath = require('gulp-watch-path'),                 //监听变化文件的路径信息
     plumber = require("gulp-plumber"),                      //一旦pipe中的某一steam报错了，保证下面的steam还继续执行
     inject = require("gulp-inject"),                        //指定需要插入html引用文件的列表
-    connect = require("gulp-connect");                      //web服务器
+    connect = require("gulp-connect"),                      //web服务器
+    httpProxy = require('http-proxy-middleware');           //gulp-connect服务代理
 
 //文件路径配置
 var filePath = require("./src/config/filePath");
@@ -348,7 +349,15 @@ gulp.task('connect', function () {
         root: host.path,
         port: host.port,
         index: host.index,
-        livereload: true
+        livereload: true,
+        middleware: function (connect, opt) {                      
+            return [
+                httpProxy('/proxy',  {
+                    target: 'http://localhost:80',
+                    changeOrigin:true
+                })
+            ]                
+        }
     });
 });
 

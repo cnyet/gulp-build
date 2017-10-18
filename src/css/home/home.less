@@ -1,0 +1,278 @@
+/**首页**/
+@import url(../common/variable.less);
+
+.home-wrap{
+	background-color: @white;
+	color: @text-6;
+	margin-bottom: 15px;
+	.home-head{
+		padding: 15px 0 0;
+		.home-head-title{
+			padding: 0 20px;
+		}
+	}
+	.home-content{
+		padding: 20px;
+		.card-list{
+			li{
+				width: 20%;
+				display: inline-block;				
+				float: left;		
+			}
+		}
+		.home-card{			
+			padding: 0 30px;			
+			.card-box{
+				height: 100px;	
+				border-radius: 10px;
+				padding: 15px;
+				color: @white;
+				position: relative;
+				text-align: center;				
+				.card-title{
+					font-size: 16px;
+					padding: 5px 0;
+				}
+				.card-num{
+					font-size: 40px;
+					color: @white;
+				}
+				.card-link{
+					display: block;
+					text-decoration: none;
+				}
+				.bg-icon{
+					width: 60px;
+					height: 60px;
+					position: absolute;
+					left: -5px;
+					bottom: 0;
+					display: inline-block;
+					background-repeat: no-repeat;
+				}
+				&.card1{
+					background-color: @card-1;
+					.bg-icon{						
+						background-image: url("../images/card1.png");						
+					}
+				}
+				&.card2{
+					background-color: @card-2;
+					.bg-icon{						
+						background-image: url("../images/card2.png");
+					}
+				}
+				&.card3{
+					background-color: @card-3;
+					.bg-icon{						
+						background-image: url("../images/card3.png");						
+					}
+				}
+				&.card4{
+					background-color: @card-4;
+					.bg-icon{						
+						background-image: url("../images/card4.png");
+					}
+				}
+				&.card5{
+					background-color: @card-5;
+					.bg-icon{						
+						background-image: url("../images/card5.png");
+					}
+				}
+			}					
+		}
+		.progress-list{
+			li{
+				width: 20%;
+				display: inline-block;				
+				float: left;
+				&.prs-last{
+					width: 12%;
+				}		
+			}
+
+		}
+		.progress-wrap{			
+			padding: 15px 0 15px 30px;			
+			position: relative;			
+			.progress-box{	
+				color: @text-3;	
+				.prs-left, .prs-right{
+					width: 50%;
+					float: left;
+					display: inline-block;
+				}	
+				.prs-right{					
+					.prs-right-box{
+						padding: 45px 5px;
+						.prs-spt{
+							width: 100px;
+							height: 12px;
+							display: inline-block;
+							background: transparent url("../images/prs-spt.png") no-repeat;
+						}
+					}					
+				}					
+				.bg-icon{
+					height: 100px;
+					width: 100px;
+					display: inline-block;
+					border-radius: 50%;
+					background-color: transparent;
+					background-repeat: no-repeat;
+				}
+				.prs-title{
+					width: 100px;
+					text-align: center;
+					line-height: 30px;
+					font-size: 16px;					
+				}
+				&.prs1{
+					.bg-icon{
+						background-image: url("../images/prs1.png");
+					}
+				}
+				&.prs2{
+					.bg-icon{
+						background-image: url("../images/prs2.png");
+					}
+				}
+				&.prs3{
+					.bg-icon{
+						background-image: url("../images/prs3.png");
+					}
+				}
+				&.prs4{
+					.bg-icon{
+						background-image: url("../images/prs4.png");
+					}
+				}
+				&.prs5{
+					.bg-icon{
+						background-image: url("../images/prs5.png");
+					}
+				}
+			}
+		}
+	}
+}
+.home-wrap-column{
+	color: @text-6;
+	margin-bottom: 15px;
+	.home-content{		
+		.home-content-left,
+		.home-content-right{
+			width: 50%;
+			float: left;
+		}
+		.home-content-left{
+			
+		}
+		.home-content-right{
+			.home-content-box{
+				margin-left: 15px;
+			}
+		}
+		.home-content-box{
+			padding: 20px;
+			background-color:@white; 
+			.home-content-head{
+				.home-head-title{
+					float: left;
+				}
+				.home-head-more{
+					color: @text-6;
+					float: right;
+				}				
+			}
+			.home-content-body{
+				margin-top: 15px;
+				table{
+					border-left: 1px #ddd solid;
+					border-right: 1px #ddd solid;
+					empty-cells: show;					
+					tr{
+						td{
+							height: 20px;
+						}
+					}
+					th, td{
+						text-align: center;
+					}
+					.pass-icon,
+					.back-icon{
+						width: 20px;
+						height: 20px;
+						vertical-align: middle;
+						display: inline-block;
+						margin: 0 5px;
+						cursor: pointer;
+					}
+					.pass-icon{						
+						background: transparent url("../images/pass-icon.png") no-repeat;
+					}
+					.back-icon{						
+						background: transparent url("../images/back-icon.png") no-repeat;
+					}
+				}
+			}
+		}		
+	}	
+}
+
+/** 登录样式 */
+.login-wrap{
+	background: radial-gradient(50% 40%, farthest-side, @white, @grey);
+	background: -webkit-radial-gradient(50% 40%, farthest-side, @white, @grey);
+	background-color: @grey;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0, finishopacity=100, style=2);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;	
+}
+.login-content{	
+	display: inline-block;
+	position: absolute;
+	top: 25%;
+	left: 50%;	
+	z-index: 2;	
+	padding:30px;
+	margin-left: -225px;
+	background-color: @white;
+	box-shadow: 0 30px 30px -10px @grey; 
+	-webkit-box-shadow: 0 30px 30px -10px @grey; 
+	.login-head{
+		text-align: center;
+		font-weight: bold;
+		padding: 20px 0;
+		font-size: 20px; 
+	}
+	.login-row{
+		margin: 20px 50px;			
+		dt{
+			width: 50px;			
+			text-align: center;
+		}
+		dd{
+			margin-left: 80px;
+			.input-text{
+				width: 220px;
+			}
+		}
+		.check-box{				
+			height: 22px;			
+		}		
+	}
+	.login-foot{
+		margin: 40px 50px;
+		.btn{
+			font-size: 16px;
+			width: 100%;
+			height: 36px;
+		}
+	}
+}

@@ -9,22 +9,24 @@ var filePath = {
         production: 'production',
         sourceCss: "src/css/**/*.css",
         sourceJs: "src/js/**/*.js",
+        targetCss: "dist/css/*.css",
+        targetJs: "dist/js/*.js",
         sourcePath: {
-            css: 'src/css/**',
-            js: 'src/js/**',
-            html: 'src/html/**/*.html',
-            images: 'src/images/**/*',
-            fonts: "src/fonts/**"
+            css: 'src/css/**/*.css',            
+            js: 'src/js/**/*.js',
+            html: 'src/**/!(_*).html',
+            images: 'src/images/**/*.{png,jpg,gif,ico}',
+            fonts: "src/css/ui/fonts/**",
+            vendors: "vendors/**"
         },
         targetPath: {
             css: 'dist/css/',
             js: 'dist/js/',
-            html: 'dist/html/',
+            html: 'dist/',
             images: 'dist/images/',
-            fonts: "dist/fonts/"
+            fonts: "dist/fonts/",
+            vendors: "dist/vendors/"
         }
 };
 
 module.exports = filePath;
-
-

@@ -357,7 +357,7 @@ gulp.task('watch', function () {
 gulp.task('connect', function () {
     var host = {
         path: "dist/",
-        port: 8082,
+        port: 3000,
         index: "index.html"
     };
     console.log('server connect----------------------------------');
@@ -381,7 +381,7 @@ gulp.task('open', function (done) {
     return gulp.src('')
         .pipe(gulpOpen({
             app: browser,
-            uri: 'http://localhost:8082'
+            uri: 'http://localhost:3000'
         }));
 });
 

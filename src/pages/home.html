@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 引入meta部分文件内容 -->
+@@include('include/_meta.html')
+</head>
+<body>
+<div class="container">
+  <h1>home页面</h1>
+  <i class="glyphicon glyphicon-heart"></i>
+</div>
+<!-- 采用requirejs模块化，有async属性的<script>时浏览器加载css一样是异步加载 -->
+<script data-main="../js/home" src="../js/lib/require.js" async></script>
+</body>
+</html>

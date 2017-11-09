@@ -1,5 +1,52 @@
-# gulp-build
-### 有三个分支：master, gulp-static, gulp-dynamic
-- master分支下是空的，包括几个不同打包方式的配置文件
-- gulp-static分支是自动化打包多页面的纯静态项目构建配置，
-- gulp-dynamic分支是自动化打包带有后台服务的多页面项目构建配置。
+# Gulp自动化构建项目
+### 前端技术架构：
+ - UI: bootstrap + bootstrap-table 
+ - JS: jquery + require.js
+ - CSS: less
+ - Build: gulp
+### 执行命令：
+ - gulp dev : 开发环境下编译
+ - gulp build : 生产环境下编译  
+
+### 目录结构
+```
+.
+├──── config                            //配置文件目录
+├──── src                               //源文件目录
+│     ├──── css                         //样式文件    
+│     │     ├──── fonts                 //字体文件目录
+│     │     ├──── less                  //字体文件目录
+│     │     │     ├──── common.less     //公共的样式文件
+│     │     │     ├──── reset.less      //重置的样式文件
+│     │     │     └──── variable.css    //定义公共变量的样式文件
+│     │     ├──── ui                    //ui组件目录
+│     │     │     ├──── bootstrap.css   //bootstrap样式文件
+│     │     │     └──── ……     
+│     │     ├──── main.css              //主要的公共样式文件
+│     │     ├──── ui.css                //组件样式css文件
+│     │     ├──── index.css             //首页样式css文件
+│     │     └──── ……                    
+│     ├──── js                          //js文件
+│     │     ├──── lib                   //js类库和插件目录
+│     │     │     ├──── jquery.js       //jquery文件
+│     │     │     └──── ……     
+│     │     ├──── common.js             //公共js文件
+│     │     ├──── index.js              //首页js文件目录
+│     │     └──── ……                    
+│     ├── images                        //图片文件目录
+│     ├── index.html                    //首页页面
+│     └── pages                         //html页面文件目录 
+│           ├──── include               //页面需要引入的公共部分目录
+│           ├──── _layout.html          //页面模板文件目录
+│           └──── ……                          
+├──── README.md                         //说明文件
+├──── .gitignore                        //git提交忽略文件集合
+├──── .eslintrc.js                      //eslint审查js配置文件
+├──── .eslintignore                     //eslint忽略的js配置文件
+├──── bower.json                        //bower文件依赖关系说明
+├──── gulpfile.js                       //gulp配置文件
+├──── LICENSE.json                      //license
+├──── tasklist.todo                     //任务列表
+└──── package.json                      //项目依赖关系说明    
+
+```

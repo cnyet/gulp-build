@@ -1,0 +1,23 @@
+{
+  "name": "project-frontend",
+  "description": "this is a project of the frontend.",
+  "main": "index.js",
+  "authors": [
+    "yate"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "modernizr": "^3.5.0"
+  }
+}

@@ -61,7 +61,6 @@ gulp.task('connect', function () {
         port: 8083,
         index: "index.html"
     };
-    console.log('server connecting----------------------------------');
     connect.server({
         root: host.path,
         port: host.port,
@@ -76,6 +75,7 @@ gulp.task('connect', function () {
             ]                
         }*/
     });
+    console.log('=====================Server Connecting=====================');
 });
 
 gulp.task('open', function (done) {

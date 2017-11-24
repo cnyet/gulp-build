@@ -23,7 +23,7 @@ var rev = require("gulp-rev");                              //加MD5版本号生
 
 module.exports = {
   compress: function(){
-    var cssFilter = filter(["src/css/**/*.css", "!src/css/ui.css"], {restore: true}),
+    var cssFilter = filter(["src/css/*.css", "!src/css/ui.css"], {restore: true}),
         compFilter = filter("src/css/ui.css", {restore: true}),
         jsFilter = filter(["src/js/*.js"], {restore: true}),
         cssOptions = {
@@ -52,7 +52,6 @@ module.exports = {
             browsers: ['last 2 versions', 'Android >= 4.0'],
             cascade: true
         }))
-        .pipe(concat("css/style.css"))
         .pipe(spriter({
             //生成sprite的位置
             spriteSheet: "dist/images/spritesheet" + timestamp + ".png",

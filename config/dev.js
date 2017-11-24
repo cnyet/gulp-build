@@ -39,7 +39,6 @@ module.exports = {
             browsers: ['last 2 versions', 'Android >= 4.0'],
             cascade: true
         }))
-        .pipe(concat("style.css"))
         .pipe(cssFilter.restore)
         .pipe(cleanCss(cssOptions))
         .pipe(plumber.stop())
@@ -126,13 +125,13 @@ module.exports = {
                           message: err.toString()
                       })(err);            
                   }}))
+                  .pipe(print())
                   .pipe(cssFilter)                     
                   .pipe(less())
                   .pipe(autoprefixer({
                       browsers: 'last 2 versions',
                       cascade: true
                   }))  
-                  .pipe(concat("style.css"))      
                   .pipe(cssFilter.restore)        
                   .pipe(cleanCss(cssOptions))
                   .pipe(plumber.stop())

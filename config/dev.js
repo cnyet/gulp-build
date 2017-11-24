@@ -32,7 +32,7 @@ module.exports = {
                         title: "Gulp error in " + err.plugin,
                         message:  err.toString()
                     })(err);            
-                }}))        
+                }}))      
         .pipe(cssFilter)        
         .pipe(less())
         .pipe(autoprefixer({
@@ -86,7 +86,6 @@ module.exports = {
       gulp.watch("src/images/**/*.{png,jpg,gif,ico}", function (event) {
           var paths = watchPath(event, 'src/', 'dist/');
           gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
-          gutil.log(gutil.colors.blue('build') + ' ' + paths.distPath);
 
           if(event.type == "deleted"){
               return gulp.src(paths.distPath)
@@ -102,33 +101,40 @@ module.exports = {
               }))
               .pipe(gulp.dest(paths.distDir))
               .pipe(connect.reload());
+              gutil.log(gutil.colors.blue('built') + ' ' + paths.distPath); 
           }
       });
 
       //监听css文件
       gulp.watch("src/css/**/*.{css,less}", function (event) {        
           var paths = watchPath(event, 'src/', 'dist/'),
-              cssFilter = filter(["src/css/**/*.{css,less}", "!src/css/ui.css"], {restore: true});
+              cssFilter = filter(["src/css/*.css", "!src/css/ui.css"], {restore: true}),
+              cssOptions = {
+                  compatibility: 'ie8',//保留ie7及以下兼容写法 类型：String 默认：''or'*' [启用兼容模式； 'ie7'：IE7兼容模式，'ie8'：IE8兼容模式，'*'：IE9+兼容模式]
+                  keepSpecialComments: '*', //保留所有特殊前缀 当你用autoprefixer生成的浏览器前缀，如果不加这个参数，有可能将会删除你的部分前缀  
+              };
           gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
-          gutil.log(gutil.colors.blue('build') + ' ' + paths.distPath);
           if(event.type == "deleted"){
               return gulp.src(paths.distPath)
                   .pipe(clean());
-          }else {          
-              return gulp.src("src/css/**/*.css")                
+          }else {     
+              gutil.log(gutil.colors.blue('built') + ' ' + paths.distPath);     
+              return gulp.src("src/css/*.css")                
                   .pipe(plumber({ errorHandler: function(err) {
                       notify.onError({
                           title: "Gulp error in " + err.plugin,
-                          message:  err.toString()
+                          message: err.toString()
                       })(err);            
-                  }}))  
-                  .pipe(cssFilter)  
+                  }}))
+                  .pipe(cssFilter)                     
                   .pipe(less())
                   .pipe(autoprefixer({
                       browsers: 'last 2 versions',
                       cascade: true
-                  }))        
+                  }))  
+                  .pipe(concat("style.css"))      
                   .pipe(cssFilter.restore)        
+                  .pipe(cleanCss(cssOptions))
                   .pipe(plumber.stop())
                   .pipe(gulp.dest("dist/css"))
                   .pipe(connect.reload());
@@ -138,7 +144,6 @@ module.exports = {
       gulp.watch("src/**/!(_*).html", function (event) {
           var paths = watchPath(event, 'src/', 'dist/');
           gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
-          gutil.log(gutil.colors.blue('build') + ' ' + paths.distPath);
           if(event.type == "deleted"){
               return gulp.src(paths.distPath)
                   .pipe(clean());
@@ -151,6 +156,7 @@ module.exports = {
                   minifyJS: true,                         //压缩页面js
                   minifyCSS: true                         //压缩页面css
               };
+              gutil.log(gutil.colors.blue('built') + ' ' + paths.distPath); 
               return gulp.src(["src/**/!(_*).html", "!src/views/include/*.html"])
                   .pipe(fileinclude({                         //在html文件中直接include文件
                       prefix: '@@',
@@ -175,11 +181,11 @@ module.exports = {
            distFilename: 'log.js' }
            */
           gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
-          gutil.log(gutil.colors.blue('build') + ' ' + paths.distPath);
           if(event.type == "deleted"){
             return gulp.src(paths.distPath)
                 .pipe(clean());
           }else {
+            gutil.log(gutil.colors.blue('built') + ' ' + paths.distPath); 
             return gulp.src(paths.srcPath)
                 .pipe(plumber({ errorHandler: function(err) {
                     notify.onError({

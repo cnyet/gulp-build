@@ -1,6 +1,6 @@
 require.config({
   paths:{
-    "common": "common"
+    "common": "util/common"
   }
 });
 define(["common"], function(common){

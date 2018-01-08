@@ -28,7 +28,7 @@ var browser = os.platform() === "linux" ? "Google chrome" : (
 //拷贝插件和图片文件到目标文件
 gulp.task("copy:files", function () {
     //拷贝插件
-    gulp.src("src/js/lib/**", {base: "src/"})
+    gulp.src("src/js/{lib,util}/**", {base: "src/"})
         .pipe(gulp.dest("dist"));
     //拷贝字体文件
     gulp.src("src/css/fonts/**", {base: "src"})
@@ -58,7 +58,7 @@ gulp.task("watch", devConfig.watchFiles);
 gulp.task('connect', function () {
     var host = {
         path: "dist/",
-        port: 8083,
+        port: 8085,
         index: "index.html"
     };
     connect.server({
@@ -82,7 +82,7 @@ gulp.task('open', function (done) {
     return gulp.src('')
         .pipe(gulpOpen({
             app: browser,
-            uri: 'http://localhost:8083'
+            uri: 'http://localhost:8085'
         }));
 });
 

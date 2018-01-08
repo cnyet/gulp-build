@@ -45,7 +45,7 @@ module.exports = {
         .pipe(gulp.dest("dist/css"))
   },
   compileJS: function(){
-    return gulp.src(["src/js/**/*.js", "!src/js/{lib,vendrs}/**"])
+    return gulp.src(["src/js/**/*.js", "!src/js/{lib,util}/**"])
         .pipe(plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,
@@ -125,7 +125,6 @@ module.exports = {
                           message: err.toString()
                       })(err);            
                   }}))
-                  .pipe(print())
                   .pipe(cssFilter)                     
                   .pipe(less())
                   .pipe(autoprefixer({
@@ -169,7 +168,7 @@ module.exports = {
       //监听js文件
       gulp.watch("src/js/**/*.js", function (event) {   
           var paths = watchPath(event, 'src/', 'dist/');
-          var jsFilter = filter(["src/js/**/*.js", "!src/js/{lib,vendrs}/**"], {restore: true});
+          var jsFilter = filter(["src/js/**/*.js", "!src/js/{lib,util}/**"], {restore: true});
           /*
            paths
            { srcPath: 'src/js/log.js',

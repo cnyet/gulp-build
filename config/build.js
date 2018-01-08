@@ -45,7 +45,7 @@ module.exports = {
             ' */',
             ''
         ].join('\n');
-    return gulp.src(["src/css/**/*.css", "!src/css/{ui,less}/**", "src/js/**/*.js", "!src/js/{lib,vendrs}/**"], {base: "src/"})         
+    return gulp.src(["src/css/**/*.css", "!src/css/{ui,less}/**", "src/js/**/*.js", "!src/js/{lib,util}/**"], {base: "src/"})         
         .pipe(cssFilter)  
         .pipe(less())
         .pipe(autoprefixer({
@@ -85,8 +85,6 @@ module.exports = {
         .pipe(gulp.dest("src/revision/"));
   },
   manifest: function(){
-    var indexFilter = filter("src/index.html", {restore: true}),
-        viewsFilter = filter("src/pages/*.html", {restore: true});
     var manifest = gulp.src("src/revision/rev-manifest.json");
     var options = {
             removeComments: true,                   //清除html注释
@@ -103,14 +101,6 @@ module.exports = {
             prefix: '@@',
             basepath: '@file'
         }))
-        .pipe(indexFilter)        
-        .pipe(inject(gulp.src('dist/css/style*.css', {read: false}), 
-            {ignorePath:"dist", addRootSlash: false, starttag: '<!-- inject:style:{{ext}} -->'}))
-        .pipe(indexFilter.restore)
-        .pipe(viewsFilter)
-        .pipe(inject(gulp.src('dist/css/style*.css', {read: false}), 
-            {ignorePath:"dist", addRootSlash: false, addPrefix: "..", starttag: '<!-- inject:style:{{ext}} -->'}))
-        .pipe(viewsFilter.restore)        
         .pipe(revReplace({manifest: manifest}))            
         .pipe(usemin())
         .pipe(htmlmin(options))

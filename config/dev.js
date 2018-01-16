@@ -71,7 +71,7 @@ module.exports = {
             minifyJS: true,                         //压缩页面js
             minifyCSS: true                         //压缩页面css
         };
-    return gulp.src(["src/**/!(_*).html", "!src/pages/include/*.html"])               
+    return gulp.src(["src/**/!(_*).html", "!src/include/*.html"])               
         .pipe(fileinclude({                         //在html文件中直接include文件
             prefix: '@@',
             basepath: '@file'
@@ -155,7 +155,7 @@ module.exports = {
                   minifyCSS: true                         //压缩页面css
               };
               gutil.log(gutil.colors.blue('built') + ' ' + paths.distPath); 
-              return gulp.src(["src/**/!(_*).html", "!src/views/include/*.html"])
+              return gulp.src(["src/**/!(_*).html", "!src/include/*.html"])
                   .pipe(fileinclude({                         //在html文件中直接include文件
                       prefix: '@@',
                       basepath: '@file'

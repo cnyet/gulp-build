@@ -5,10 +5,14 @@
 @@include('include/_meta.html')
 </head>
 <body>
-  <div class="container">
-    <header class="wrap">首页</header>
-    <nav>jquery1.7.2虽然让nav标签变色了，但是高度没变</nav>
-  </div>
+<!-- 检测当前浏览器版本 -->
+@@include('include/_outdated.html')
+
+<div class="container">
+  <header class="wrap">首页</header>
+  <nav>jquery1.7.2虽然让nav标签变色了，但是高度没变</nav>
+</div>
+
 <!-- 引入footer部分文件内容 -->
 @@include('include/_footer.html')
 <!-- 采用requirejs模块化，有async属性的<script>时浏览器加载css一样是异步加载 -->

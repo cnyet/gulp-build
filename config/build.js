@@ -35,7 +35,7 @@ module.exports = {
                 }
             }
         },
-        timestamp = +new Date();
+        timestamp = new Date().getTime().toString(16).substr(0, 7);
     //配置文件头部标注信息
     var pkg = require(path.resolve(__dirname, '../package.json')),
         info = ['/**',
@@ -54,9 +54,9 @@ module.exports = {
         }))
         .pipe(spriter({
             //生成sprite的位置
-            spriteSheet: "dist/images/spritesheet" + timestamp + ".png",
+            spriteSheet: "dist/images/spritesheet-" + timestamp + ".png",
             //修改样式文件引用图片地址路径
-            pathToSpriteSheetFromCSS: "../images/spritesheet" +timestamp + ".png",
+            pathToSpriteSheetFromCSS: "../images/spritesheet-" +timestamp + ".png",
             spritesmithOptions: {
                 padding: 10
             }

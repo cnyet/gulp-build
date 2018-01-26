@@ -31,6 +31,7 @@
 html, body{
   margin: 0;
   padding: 0; 
+  height: 100%;
 }
 html{
   font-size: 16px;
@@ -39,11 +40,23 @@ html{
 .wrap{
   display: flex;
   .px2rem(font-size, 20);
+  .logo{
+    display: inline-block;
+    width: 30px;
+    margin: 15px;
+    height: 30px;
+    background: transparent url("../images/logo.png?__spriter") no-repeat;    /* url带有?__spriter后缀的图片将会合并成雪碧图，没有后缀的不合并 */
+    background-size: cover;
+  }
 }
 nav {
     .px2rem(width, 200);
     .px2rem(height, 100);
     background: spin(#f12, 10%);
+}
+.wrapper{
+  background: transparent url("../images/bg_01.jpg") no-repeat;
+  background-size: cover;
 }
 /* 页头-start */
 

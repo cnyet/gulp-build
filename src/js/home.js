@@ -5,7 +5,7 @@ require.config({
   }
 });
 
-require(["common"], function(common){
+require(["common"], function(){
   console.log("这是home");
 });
 

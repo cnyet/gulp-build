@@ -5,6 +5,8 @@ require.config({
       "jquery": "jquery.min",
       "bootstrap": "bootstrap.min",
       "outdatedbrowser": "outdatedbrowser.min",  
+      "validate": "jquery.validate.min",
+      "methods": "additional-methods.min"
     },
     shim: {
       "bootstrap": {
@@ -13,10 +15,13 @@ require.config({
       "outdatedbrowser": {
         exports: "outdatedBrowser"
       },
+      "validate": {
+        deps: ['jquery']
+      }
     }
 });
 //定义模块
-define(['jquery', "bootstrap", "outdatedbrowser"], function($){
+define(['jquery', "bootstrap", "outdatedbrowser", "validate"], function($){
   //检测是否是现代浏览器
   outdatedBrowser({
     lowerThan: 'transform',

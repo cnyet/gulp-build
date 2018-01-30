@@ -16,6 +16,7 @@ var header = require("gulp-header");                        //用来在压缩后
 var revReplace = require("gulp-rev-replace");               //重写加了MD5的文件名
 var usemin = require("gulp-usemin");                        //文件合并到指定的目录，将样式和脚本直接嵌入到页面中，移除部分文件，为文件执行各种任务
 var uglify = require("gulp-uglify");                        //压缩js代码
+var gulpif = require("gulp-if");                            //根据条件判断包含还是排除文件
 var fileinclude = require("gulp-file-include");             //在html中引入模板文件
 var htmlmin = require("gulp-htmlmin");                      //压缩html文件
 var inject = require("gulp-inject");                        //指定需要插入html引用文件的列表
@@ -25,7 +26,7 @@ module.exports = {
   compress: function(){
     var cssFilter = filter(["src/css/*.css", "!src/css/ui.css"], {restore: true}),
         compFilter = filter("src/css/ui.css", {restore: true}),
-        jsFilter = filter(["src/js/*.js"], {restore: true}),
+        jsFilter = filter(["src/js/*.js", "src/js/util/*.js"], {restore: true}),
         cssOptions = {
             compatibility: 'ie8',//保留ie7及以下兼容写法 类型：String 默认：''or'*' [启用兼容模式； 'ie7'：IE7兼容模式，'ie8'：IE8兼容模式，'*'：IE9+兼容模式]
             keepSpecialComments: '*', //保留所有特殊前缀 当你用autoprefixer生成的浏览器前缀，如果不加这个参数，有可能将会删除你的部分前缀           
@@ -45,7 +46,13 @@ module.exports = {
             ' */',
             ''
         ].join('\n');
-    return gulp.src(["src/css/**/*.css", "!src/css/{ui,less}/**", "src/js/**/*.js", "!src/js/{lib,util}/**"], {base: "src/"})         
+    var condition = function(f){
+        if(f.path.match(/js\\util\\/)){
+            return false;
+        }
+        return true;
+    };
+    return gulp.src(["src/css/**/*.css", "!src/css/{ui,less}/**", "src/js/**/*.js", "!src/js/lib/**"], {base: "src/"})         
         .pipe(cssFilter)  
         .pipe(less())
         .pipe(autoprefixer({
@@ -77,9 +84,9 @@ module.exports = {
         .pipe(uglify())
         .pipe(header(info, {
             pkg: pkg
-        }))  
-        .pipe(jsFilter.restore)           
-        .pipe(rev())
+        })) 
+        .pipe(jsFilter.restore)   
+        .pipe(gulpif(condition, rev())) 
         .pipe(gulp.dest("dist/"))
         .pipe(rev.manifest())
         .pipe(gulp.dest("src/revision/"));

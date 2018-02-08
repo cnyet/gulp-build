@@ -6,7 +6,8 @@ require.config({
       "bootstrap": "bootstrap.min",
       "outdatedbrowser": "outdatedbrowser.min",  
       "validate": "jquery.validate.min",
-      "methods": "additional-methods.min"
+      "methods": "additional-methods.min",
+      "loader": "mloading"  
     },
     shim: {
       "bootstrap": {
@@ -17,7 +18,11 @@ require.config({
       },
       "validate": {
         deps: ['jquery']
-      }
+      },
+      "loader": {
+        deps: ['jquery'],
+        exports: "loader"
+      }   
     }
 });
 //定义模块

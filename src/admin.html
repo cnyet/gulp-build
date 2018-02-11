@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 引入meta部分文件内容 -->
+@@include('include/_meta.html')
+</head>
+<body>
+<!-- 检测当前浏览器版本 -->
+@@include('include/_outdated.html')
+
+<!-- 引入后台管理界面header部分 -->
+@@include('admin/_header.html')
+
+<div class="admin-container clearfix">
+<!-- 引入后台管理左侧导航部分 -->
+@@include('admin/_aside.html')
+
+  <div class="admin-body">
+    <div class="admin-welcome">
+        <i class="welcome-icon"></i>
+        <p class="welcome-text">欢迎进入系统管理后台</p>
+    </div>
+  </div>
+</div>
+
+<!-- 采用requirejs模块化，有async属性的<script>时浏览器加载css一样是异步加载 -->
+<script data-main="js/admin.js" src="js/lib/require.js" defer async></script>
+</body>
+</html>

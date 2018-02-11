@@ -1,9 +1,15 @@
 # Gulp自动化构建项目
+> 这是一个自动化构建项目的脚手架，包含常用的ui组件和常用插件，卡快速开发PC端前
+> 台和后台的项目。提供实时修改渲染和http访问。
+> 
+
 ### 前端技术架构：
  - UI: bootstrap + bootstrap-table 
  - JS: jquery + require.js
+ - plug-in: layui
  - CSS: less
  - Build: gulp
+ 
 ### 执行命令：
  - gulp dev : 开发环境下编译
  - gulp build : 生产环境下编译  

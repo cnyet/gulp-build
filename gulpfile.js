@@ -28,7 +28,7 @@ var browser = os.platform() === "linux" ? "Google chrome" : (
 //拷贝插件和图片文件到目标文件
 gulp.task("copy:files", function () {
     //拷贝插件
-    gulp.src("src/js/lib/**", {base: "src/"})
+    gulp.src("src/js/{lib,util}/**", {base: "src/"})
         .pipe(gulp.dest("dist"));
     //拷贝字体文件
     gulp.src("src/css/fonts/**", {base: "src"})

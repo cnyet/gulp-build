@@ -1,30 +1,36 @@
 <header class="navbar-wrapper">
-    <div class="navbar navbar-fixed-top">
-        <div class="container-fluid cl">
-            <a class="logo navbar-logo f-l mr-10" href="#">
-                <img src="static/h-ui.admin/images/logo.png" alt="警用装备管理系统">
-            </a>
-            <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
-            <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
-                <ul class="cl">
-                    <li>
-                        <div class="navbar-user">
-                            <img class="navbar-user-img" src="" alt="">欢迎您，admin
-                        </div>
-                    </li>
-                    <li class="navbar-msg">
-                        <a href="#" title="消息">
-                            <span class="badge badge-danger">1</span>
-                            <i class="Hui-iconfont Hui-iconfont-xiaoxi"></i>
-                        </a>
-                    </li>
-                    <li class="dropDown dropDown_hover">
-                        <a href="#" title="退出">
-                            <i class="Hui-iconfont Hui-iconfont-power"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">logo</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
 </header>

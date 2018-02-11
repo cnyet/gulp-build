@@ -139,7 +139,7 @@ module.exports = {
           }
       });
       //监听html文件
-      gulp.watch("src/**/!(_*).html", function (event) {
+      gulp.watch("src/**/*.html", function (event) {
           var paths = watchPath(event, 'src/', 'dist/');
           gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
           if(event.type == "deleted"){
@@ -155,7 +155,7 @@ module.exports = {
                   minifyCSS: true                         //压缩页面css
               };
               gutil.log(gutil.colors.blue('built') + ' ' + paths.distPath); 
-              return gulp.src(["src/**/!(_*).html", "!src/include/*.html"])
+              return gulp.src(["src/**/!(_*).html"])
                   .pipe(fileinclude({                         //在html文件中直接include文件
                       prefix: '@@',
                       basepath: '@file'

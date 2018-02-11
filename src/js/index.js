@@ -1,13 +1,12 @@
 //对模块的加载行为进行自定义
 require.config({
   paths:{
-    "test": "util/test",
-    
+    "common": "util/common",    
   },
 
 });
 
-require(["test"], function(test){
-    console.log(test.foo(2, 3));
+require(["common"], function(){
+  console.log("首页");
 });
 

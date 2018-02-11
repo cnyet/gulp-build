@@ -4,13 +4,54 @@
 <!-- 引入meta部分文件内容 -->
 @@include('include/_meta.html')
 </head>
-<body class="wrapper">
+<body>
 <!-- 检测当前浏览器版本 -->
 @@include('include/_outdated.html')
 
-<div class="container">
-  <header class="wrap"><span class="logo"></span>首页</header>
-  <nav>虽然让nav标签变色了，但是高度没变</nav>
+<!-- 检测当前浏览器版本 -->
+@@include('include/_header.html')
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img class="first-slide" src="" alt="First slide">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Example headline.</h1>
+          <p>Note: If you're viewing this page via .</p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img class="second-slide" src="" alt="Second slide">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Another example headline.</h1>
+          <p>Cras justo odio, dapibus ac facilisis in.</p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img class="third-slide" src="" alt="Third slide">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>One more for good measure.</h1>
+          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="fa fa-chevron-left" aria-hidden="true"></span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="fa fa-chevron-right" aria-hidden="true"></span>
+  </a>
 </div>
 
 <!-- 引入footer部分文件内容 -->

@@ -1,0 +1,506 @@
+@import url(variable.less);
+
+html, body{
+  height: 100%;
+  position: relative;
+}
+/* 页头-start */
+.admin-header{
+  height: 90px;
+  background: transparent url("../images/head.png") repeat-x;
+  .header-wrap{
+    .header-left{
+      width: 50%;
+      float: left;
+      padding: 29px 15px;
+      .logo-wrap{
+        width: 275px;
+        height: 32px;
+        background-color: @grey-f1;
+        display: inline-block;
+        float: left;
+      }
+      .header-title{
+        padding-left: 15px;
+        margin-left: 15px;
+        margin-top: 7px;
+        border-left: 2px @white solid;
+        color: @white;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 20px;
+        display: inline-block;
+      }
+    }
+    .header-right{
+      width: 50%;
+      float: right;
+      color: @white;
+      height: 90px;
+      text-align: right;
+      font-size: 16px;
+      .admin-name{
+        padding: 30px 10px;
+        line-height: 30px;
+        display: inline-block;
+      }
+      .admin-controls{
+        display: inline-block;
+        padding: 30px 10px;
+        line-height: 30px;
+        height: 90px;
+        vertical-align: middle;
+        font-size: 22px;
+        color: @white;
+        &:hover{
+          background-color: @focus-color;
+          text-decoration: none;
+        }
+        .list-icon{
+          width: 24px;
+          height: 24px;
+          display: inline-block;
+          background: transparent url("../images/list-icon.png?__spriter") no-repeat;
+        }
+        .power-icon{
+          width: 24px;
+          height: 24px;
+          display: inline-block;
+          background: transparent url("../images/power-icon.png?__spriter") no-repeat;
+        }
+      }
+    }
+  }
+}
+/* 页头-end */
+
+
+/* 页面主体-start */
+.login-container{
+  width: 100%;
+  height: 100%;
+  display: table;
+  background: transparent url("../images/login-bg.png") no-repeat center;
+  background-size: cover;
+  .login-wrap{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    .login-box{
+      display: inline-block;
+      .login-icon{
+        width: 300px;
+        height: 300px;
+        background: transparent url("../images/login-icon.png") no-repeat;
+        background-size: cover;
+        display: inline-block;
+        vertical-align: middle;
+      }      
+    }
+    .login-form{
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 50px;
+      .form-inline{        
+        text-align: left;
+        display: inline-block;
+        position: relative;
+        .fa-lock{
+          position: absolute;
+          left: 10px;
+          top: 7px;
+          font-size: 26px;
+          color: @btn-bg;
+        }
+        .form-control{
+          width: 300px;
+          height: 40px;
+          padding-left: 32px;
+        }
+        .btn{
+          height: 40px;
+          width: 100px;
+          font-size: 16px;
+          background-color: @btn-bg;
+          border: 1px @btn-border solid;
+          box-shadow: inset 0 0 2px 2px lighten(@btn-focus, 15%);
+          &:hover{
+            background-color: @btn-focus;
+          }
+        }
+      }
+      .form-title{
+        color: @white;
+        text-align: left;
+        font-size: 30px;
+        line-height: 30px;
+        margin: 20px 0;        
+        .form-name{
+          font-weight: bold;
+        }
+        .form-val{
+          margin-left: 15px;
+          padding-left: 15px;
+          border-left: 2px @white solid;
+          line-height: 26px;
+          font-size: 26px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+.admin-aside{
+  float: left;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 260px;
+  margin-left: -260px;
+  background-color: @aside-bg;
+  border-right: 1px @border-color solid;
+  .menu-group{
+    list-style-type: none;
+    li{
+      border-bottom: 1px @border-color solid;
+      &.active{
+        a{
+          background-color: @aside-hover;
+          color: @text-3;
+        }        
+      }
+      a{
+        display: block;
+        padding: 15px 30px;
+        line-height: 30px;
+        font-size: 16px;
+        height: 60px;
+        border: none;
+        margin-bottom: 0;
+        background-color: transparent;        
+        &:hover{          
+          background-color: @aside-hover;
+        }
+        .caret{
+          float: right;
+          margin-top: 10px;
+          margin-right: -10px;
+          border-left: 4px dashed;
+          border-top: 4px solid transparent;
+          border-bottom: 4px solid transparent;
+        }
+        .aside-icon{
+          width: 30px;
+          height: 28px;
+          display: inline-block;
+          margin-right: 10px;
+          vertical-align: middle;
+          &.item01{
+            background: transparent url("../images/aside-01.png?__spriter") no-repeat;
+          }
+          &.item02{
+            background: transparent url("../images/aside-02.png?__spriter") no-repeat;
+          }
+          &.item03{
+            background: transparent url("../images/aside-03.png?__spriter") no-repeat;
+          }
+          &.item04{
+            background: transparent url("../images/aside-04.png?__spriter") no-repeat;
+          }
+          &.item05{
+            background: transparent url("../images/aside-05.png?__spriter") no-repeat;
+          }
+          &.item06{
+            background: transparent url("../images/aside-06.png?__spriter") no-repeat;
+          }
+          &.item07{
+            background: transparent url("../images/aside-07.png?__spriter") no-repeat;
+          }
+        }
+      }
+    }
+    .dropdown-wrap{
+      top: -10px;
+      right: -50%;
+      left: auto;
+      padding: 0;
+      margin: 0;
+      background-color: @aside-bg;
+      li{
+        a{
+          font-size: 14px;
+          height: 40px;
+          padding: 5px 15px;
+        }
+        &:last-child{
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+}
+.admin-container{
+  background-color: @white;
+  position: absolute;
+  top: 90px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-left: 260px;
+  overflow-y: auto;
+  .admin-body{
+    .admin-welcome{
+      position: absolute;
+      left: 50%;
+      top: 30%;
+      text-align: center;
+      .welcome-icon{
+        width: 150px;
+        height: 150px;
+        display: inline-block;
+        background: transparent url("../images/home-icon.png") no-repeat;
+        background-size: cover;
+      }
+      .welcome-text{
+        margin: 10px 0;
+        font-size: 18px;
+        font-weight: bold;
+        color: @focus-text;
+      }
+    }  
+    .breadcrumb{
+      li{
+        color: @text-9;
+        &.active{
+          color: @text-3;
+        }
+      }
+    }
+  }
+  .admin-content{
+    padding: 0 20px;
+    .admin-head{
+      &-left{
+        width: 400px;
+        display: inline-block;
+        position: relative;
+        .form-control{        
+          height: 40px;
+          padding-right: 40px;
+        }
+        .search-icon{
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+          background: transparent url("../images/search-icon.png?__spriter") no-repeat;
+        }
+      }
+      &-right{
+        float: right;
+      }     
+    }
+    .table-wrap{
+      thead{
+        background-color: @aside-hover;
+        text-align: center;
+        tr{
+          th{
+            text-align: center;
+          }
+        }
+      }
+      tbody{
+        tr{
+          td{
+            text-align: center;
+          }
+        }
+      }
+      .fa{
+        margin-right: 5px;
+      }
+    }
+    .fixed-table-pagination{
+      text-align: center;
+      .pagination{
+        &>li{
+          &.active{
+            a{
+              background-color: @focus-text;
+              border-color: @focus-text;
+              color: @white;
+            }
+          }
+          &>a{
+            color: @text-6;            
+          }        
+        }
+      }
+    }
+    .btn{
+      outline: none;
+      margin-left: 10px;
+      .fa{
+        margin-right: 10px;
+      }
+    }
+    .btn-add{
+      background-color: @focus-text;
+      border-color: @focus-text;
+      &:hover{
+        background-color: darken(@focus-text, 10%);
+        border-color: darken(@focus-text, 10%);
+      }
+      &:focus{
+        background-color: darken(@focus-text, 10%);
+        border-color: darken(@focus-text, 10%);
+      }
+    }
+    .btn-del{
+      background-color: @btn-del;
+      border-color: @btn-del;
+      &:hover{
+        background-color: darken(@btn-del, 10%);
+        border-color: darken(@btn-del, 10%);
+      }
+      &:focus{
+        background-color: darken(@btn-del, 10%);
+        border-color: darken(@btn-del, 10%);
+      }
+    }
+    .layui-tab{
+      margin: 20px 0;
+      border: 1px @border-color solid;
+      .layui-tab-title {
+        border-bottom-color: @border-color;
+        background-color: @aside-hover;
+        li{
+          padding: 0 20px;
+          &:first-child{
+            &.layui-this{
+              &:after{
+                border-width: 0 1px 0 0;
+              }
+            }
+          }
+          &.layui-this{
+            color: @focus-text;
+            background-color: @white;
+            &:after{
+              border-radius: 0;
+              border-width: 0 1px 0 1px;
+              border-color: @border-color;
+            }
+          }
+        }        
+      }
+      .layui-tab-content{
+        padding: 0;
+      }
+    }
+    .tabs-container{
+      height: 400px;
+      overflow-y: auto;
+      .tabs-content{
+        padding: 15px;
+        .form-textarea{
+          resize: none;
+          height: 300px;          
+        }
+        .tabs-foot{
+          margin-top: 15px;   
+          .tabs-warn{
+            float: right;
+            color: @red;
+          }
+        }
+      }
+      .tabs-group{
+        padding: 15px;
+        list-style-type: none;
+        li{          
+          float: left;
+          margin: 10px;
+          &.active{
+            .label-item{
+              background-color: darken(@grey-f2, 10%);
+            }
+          }
+          .label-item{
+            display: inline-block;
+            min-width: 80px;
+            height: 40px;
+            line-height: 28px;
+            font-size: 14px;
+            color: @text-6;
+            padding: 5px 15px;
+            border: 1px @border-color solid;
+            background-color: @grey-f2;
+          }
+        }        
+      }
+    }
+    .admin-foot{
+      text-align: center;
+    }
+  }
+}
+.layer-skin{
+  .layui-layer-btn{
+    .layui-layer-btn0{
+      background-color: @focus-text;
+      border-color: @focus-text;
+      &:hover{
+        background-color: darken(@focus-text, 10%);
+        border-color: darken(@focus-text, 10%);
+      }
+    }    
+    .layui-layer-btn1{
+      color: @white;
+      background-color: @btn-del;
+      border-color: @btn-del;
+      &:hover{
+        background-color: darken(@btn-del, 10%);
+        border-color: darken(@btn-del, 10%);
+      }
+    }    
+  }
+  .dlg-wrap{
+    margin-bottom: 0;
+    .dlg-textarea{ 
+      height: 200px;     
+      resize: none;
+    }
+    .dlg-foot{
+      margin-top: 10px;
+      .dlg-warn{
+        float: right;
+        color: @red;
+      }
+    }
+    .trash-wrap{
+      text-align: center;
+      padding: 10px 0;
+      .trash-text{
+        font-size: 16px;
+        margin-top: 15px;
+      }
+      .trash-img{
+        width: 114px;
+        height: 92px;
+        display: inline-block;
+        background: transparent url("../images/trash-img.png") no-repeat;
+        background-size: cover;
+      }
+    }    
+  }
+}
+/* 页面主体-end */
+
+
+/* 页脚-start */
+
+/* 页脚-end */

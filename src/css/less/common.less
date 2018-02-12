@@ -41,22 +41,66 @@ body {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 20;
+  z-index: 5;
+  background: linear-gradient(to bottom, rgba(0,0,0,.2) 0%, rgba(0,0,0,.1) 50%, rgba(0,0,0,0) 100%);
   .navbar{
     margin-top: 20px;
     border-radius: 4px;
+    .navbar-brand{
+      color: @white;
+    }
+    .navbar-nav{
+      float: right;
+      &>li{
+        &.active{
+          a{
+            background-color: rgba(200,200,200,.3);
+          } 
+        }
+        &.open{
+          &>a{
+            background-color: rgba(200,200,200,.3);
+          }          
+        }
+        &>a{
+          &:hover{
+            background-color: rgba(200,200,200,.3);
+          }
+          color: @white;
+        }
+      }
+      .dropdown-menu{
+        background-color: rgba(200,200,200,.3);
+        border: 0;
+        &>li{
+          &>a{
+            &:hover{
+              background-color: rgba(200,200,200,.3);
+            }
+            color: @white;
+          }
+        }
+      }
+    }
   }
 }
 .carousel { 
-  .item {
-    height: 600px;
-    background-color: #777;
-    &>img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      height: 600px;
+  .carousel-inner{
+    .item{
+      max-height: 100vh;
+      width: auto;
+    }
+    .slide01{
+      background: transparent url("../images/bg_01.jpg") no-repeat;
+      background-size: cover;
+    }
+    .slide02{
+      background: transparent url("../images/bg_02.jpg") no-repeat;
+      background-size: cover;
+    }
+    .slide03{
+      background: transparent url("../images/bg_03.jpg") no-repeat;
+      background-size: cover;
     }
   }
   .carousel-control{
@@ -68,7 +112,45 @@ body {
     }
   }
 }
-
+.content-wrap{
+  .row{
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  .content-head{
+    text-align: center;
+    h2{
+      margin: 15px 0;
+    }
+    p{
+      text-align: left;
+    }
+    .content-btn-wrap{
+      margin: 15px 0;
+      text-align: center;
+    }
+  }
+  .img-circle{
+    background-color: @grey;
+  }
+  .feature{
+    .feature-heading{
+      margin: 15px 0;
+    }
+    .feature-right{
+      text-align: right;
+    }
+  }
+  .featurette-divider{
+    border-top: 1px solid #eee;
+  }
+}
+footer{
+  background-color: @black;
+  text-align: center;
+  color: @text-9;
+  padding: 10px 0;
+}
 /* 页头-end */
 
 /* 侧边栏-start */

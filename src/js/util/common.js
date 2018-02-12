@@ -4,9 +4,7 @@ require.config({
     paths:{
       "jquery": "jquery.min",
       "bootstrap": "bootstrap.min",
-      "outdatedbrowser": "outdatedbrowser.min",  
-      "validate": "jquery.validate.min",
-      "methods": "additional-methods.min",
+      "outdatedbrowser": "outdatedbrowser.min",       
       "loader": "mloading"  
     },
     shim: {
@@ -16,9 +14,6 @@ require.config({
       "outdatedbrowser": {
         exports: "outdatedBrowser"
       },
-      "validate": {
-        deps: ['jquery']
-      },
       "loader": {
         deps: ['jquery'],
         exports: "loader"
@@ -26,7 +21,7 @@ require.config({
     }
 });
 //定义模块
-define(['jquery', "bootstrap", "outdatedbrowser", "validate"], function($){
+define(['jquery', "bootstrap", "outdatedbrowser"], function($){
   //检测是否是现代浏览器
   outdatedBrowser({
     lowerThan: 'transform',
@@ -37,14 +32,6 @@ define(['jquery', "bootstrap", "outdatedbrowser", "validate"], function($){
   if(!Modernizr.mq('only all')) {
     $('<script src="/js/lib/respond.min.js"></script>').appendTo("head");
     console.log("Your browser can't support the media query feature");      
-  }
-
-  var add = function(x, y){
-      console.log("这是common");
-      return x+y;
-  };
-  return {
-      add: add
   }
   
 });

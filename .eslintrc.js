@@ -31,6 +31,7 @@ module.exports = {
       "$": true,
       "Modernizr": true,
       "require": true,
-      "define": true    
+      "define": true,
+      "layui": true    
     }        
 };

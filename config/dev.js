@@ -45,7 +45,7 @@ module.exports = {
         .pipe(gulp.dest("dist/css"))
   },
   compileJS: function(){
-    return gulp.src(["src/js/**/*.js", "!src/js/{lib,util}/**"])
+    return gulp.src(["src/js/**/*.js", "!src/js/lib/**"])
         .pipe(plumber({ errorHandler: function(err) {
             notify.onError({
                 title: "Gulp error in " + err.plugin,

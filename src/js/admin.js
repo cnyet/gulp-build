@@ -3,7 +3,7 @@ require.config({
   paths:{
     "common": "util/common",
     "bootstrapTable": "bootstrap-table.min",
-    "bootstrapTableCN": "bootstrap-table-zh-CN.min",
+    "bootstrapTableCN": "bootstrap-table-zh-CN.min",    
     "layui": "layui"
   },
   shim: {

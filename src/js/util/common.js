@@ -1,6 +1,7 @@
 //对模块的加载行为进行自定义
 require.config({
-    baseUrl: "js/lib",     //根目录
+    //根目录
+    baseUrl: "js/lib", 
     paths:{
       "jquery": "jquery.min",
       "bootstrap": "bootstrap.min",

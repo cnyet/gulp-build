@@ -85,8 +85,8 @@ module.exports = {
         .pipe(header(info, {
             pkg: pkg
         })) 
-        .pipe(jsFilter.restore)   
-        .pipe(gulpif(condition, rev())) 
+        .pipe(jsFilter.restore)  
+        .pipe(gulpif(condition, rev()))         
         .pipe(gulp.dest("dist/"))
         .pipe(rev.manifest())
         .pipe(gulp.dest("src/revision/"));

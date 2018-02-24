@@ -32,6 +32,7 @@ module.exports = {
       "Modernizr": true,
       "require": true,
       "define": true,
-      "layui": true    
+      "layui": true,
+      "outdatedBrowser": true    
     }        
 };

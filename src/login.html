@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 引入meta部分文件内容 -->
+@@include('include/_meta.html')
+</head>
+<body>
+<!-- 检测当前浏览器版本 -->
+@@include('include/_outdated.html')
+
+<div class="login-container">
+  <div class="login-wrap">
+    <div class="login-box">
+      <i class="login-icon"></i>
+      <div class="login-form">
+        <p class="form-title">
+          <span class="form-name">后台管理系统</span><span class="form-val">登录</span>
+        </p> 
+        <div class="form-inline">     
+          <i class="fa fa-lock"></i>         
+          <input type="password" class="form-control">
+          <button type="submit" class="btn btn-primary">登 录</button>        
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<script data-main="js/login.js" src="js/lib/require.js" defer async></script>
+</body>
+</html>

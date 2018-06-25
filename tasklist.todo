@@ -1,9 +1,8 @@
-行政管理平台:
-  前端技术架构：
-                       UI: bootstrap + bootstrap-table 
-                       JS: jquery + require.js
-                       CSS: less
-                       Build: gulp
+前端技术架构：
+ UI: bootstrap + bootstrap-table 
+ JS: jquery + require.js
+ CSS: less
+ Build: gulp
 前端开发任务列表:
  ✔ 项目目录结构设计 @done (18-02-11 15:28)
  ✔ gulp自动化打包文件配置 @done (18-02-11 15:28)
